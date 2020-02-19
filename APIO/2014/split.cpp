@@ -11,8 +11,6 @@ In case the gradient is the same, take the line with larger constant.
 sample tc:
 4 1
 6 0 1 16
-
-The code is very very messy. Will clean it up later.
 */
 
 #include<bits/stdc++.h>
@@ -29,14 +27,34 @@ struct Line {
     Line(LL g, LL c, LL i): gradient(g), constant(c), index(i) {}
 };
 
+//STL's deque got TLE
+class MyDeque {
+private:
+    int idxFront, idxBack;
+    Line values[MAXN + 3];
+
+public:
+    MyDeque() {
+        idxFront = 0;
+        idxBack = 1;
+    }
+
+    void clear() { idxFront = 0; idxBack = 1; }
+    int size() { return idxFront - idxBack + 1; }
+
+    Line back() { return values[idxBack]; }
+    Line secondBack() { return values[idxBack + 1]; }
+    void popBack() { ++idxBack; }
+
+    Line front() { return values[idxFront]; }
+    Line secondFront() { return values[idxFront - 1]; }
+    void pushFront(Line l) { values[++idxFront] = l; }
+    void popFront() { --idxFront; }
+} dq;
+
 int N, K;
 LL prefix[MAXN + 3], dp[MAXN + 3][2];
 int sol[MAXN + 3][MAXK + 3];
-
-int front, back;
-Line lines[MAXN + 3];
-
-LL ops = 0;
 
 double crossingX(Line a, Line b) {
     return ((double) (b.constant - a.constant)/(a.gradient - b.gradient));
@@ -45,39 +63,29 @@ double crossingX(Line a, Line b) {
 void insert(LL gradient, LL constant, LL index) {
     Line line(gradient, constant, index);
 
-    bool shouldAdd = true;
     while (true) {
-        if (DEBUG) ops += 1;
-
-        if (front - back + 1 == 0)
+        if (dq.size() == 0)
             break;
 
-        if (line.gradient == lines[front].gradient) {
-            if (line.constant > lines[front].constant)
-                front -= 1;
-            else {
-                shouldAdd = false;
-                break;
-            }
-        } else if (front - back + 1 > 1 && crossingX(lines[front - 1], lines[front]) > crossingX(lines[front], line)) {
-            front -= 1;
-        } else
+        if (line.gradient == dq.front().gradient) {
+            if (line.constant > dq.front().constant)
+                dq.popFront();
+            else
+                return;
+        } else if (dq.size() > 1 && crossingX(dq.secondFront(), dq.front()) > crossingX(dq.front(), line))
+            dq.popFront();
+        else
             break;
     }
 
-    if (shouldAdd) {
-        front += 1;
-        lines[front] = line;
-    }
+    dq.pushFront(line);
 }
 
 Line query(LL x) {
-    while (front - back + 1 > 1 && crossingX(lines[back], lines[back + 1]) < x) {
-        if (DEBUG) ops += 1;
-        back += 1;
-    }
+    while (dq.size() > 1 && crossingX(dq.back(), dq.secondBack()) < x)
+        dq.popBack();
 
-    return lines[back];
+    return dq.back();
 }
 
 void printSolution() {
@@ -85,7 +93,6 @@ void printSolution() {
     int currentN = N;
     int currentK = K;
     while (true) {
-        if (DEBUG) ops += 1;
         int s = sol[currentN][currentK];
 
         if (s > 0)
@@ -98,7 +105,6 @@ void printSolution() {
     }
 
     for (int i = 0; i < solution.size(); i++) {
-        if (DEBUG) ops += 1;
         if (i > 0)
             printf(" ");
 
@@ -126,13 +132,11 @@ int main() {
         dp[n][t] = 0;
 
     for (int k = 2; k <= K; k++) {
-        front = 0;
-        back = 1;
+        dq.clear();
 
         t = 1 - t;
         dp[1][t] = -INF;
         for (int n = 2; n <= N; n++) {
-            if (DEBUG) ops += 1;
             insert(prefix[n - 1], dp[n - 1][1 - t] - prefix[n - 1]*prefix[n - 1], n - 1);
 
             Line best = query(prefix[n]);
@@ -144,6 +148,4 @@ int main() {
 
     printf("%lld\n", dp[N][t]);
     printSolution();
-
-    if (DEBUG) cout << "ops: " << ops << endl;
 }
