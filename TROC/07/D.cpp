@@ -43,16 +43,3 @@ int main() {
     }
     cout << endl;
 }
-
-/*
-Bangunan merah harus lebih tinggi daripada bangunan putih di kirinya
-Bangunan putih harus lebih rendah daripada bangunan merah di kirinya
-
-Kalau ada yang kembar, hapus saja karena tidak berguna.
-Yang menurun lebih dari 2, hapus sisanya
-
-5 4 3 2 3 1
-
-Kalau ada Hi such that Hi-1 < Hi dan Hi < Hi+1, buang Hi
-Kalau ada Hi such that Hi-1 > Hi dan Hi > Hi+1, buang Hi. How to implement this?
-*/
