@@ -4,5 +4,8 @@ If the desired K is 1, the answer is the length of the string itself. If the des
 # EC_P
 Finding bridge in graph.
 
+# GRAFFDEF
+Bridge tree. Convert the given graph to bridge tree, i.e a graph where each edge is a bridge in the given graph, each node is a group of node which is biconnected in the given graph. After that, we calculate the number of ways where we win. We win when the two chosen nodes are in the same component.
+
 # SUBMERGE
 Finding articulation point in graph.
