@@ -18,3 +18,5 @@ Proof: Let's look at the height difference of the two neighbors. There a couple 
 * The difference is 0, then we can extend current fence 1 time.
 * The difference is 1, then we can extend current fence 1 or 2 times.
 * The difference is > 1, then we can extend current fence 1 time.
+
+With above observation, with can solve it with dynamic programming dp[i][k] -> minimum cost to build the first i fence such that the i-th fence is extended k times and there are no two neighboring fence with same height.
