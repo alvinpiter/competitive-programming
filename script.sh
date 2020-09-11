@@ -25,6 +25,6 @@ git commit -m "Update index.html" > /dev/null 2>&1
 git push https://${GITHUB_TOKEN}@github.com/alvinpiter/competitive-programming.git --force gh-pages
 printf 'Pushing changes to remote gh-pages branch is done!\n'
 
-git checkout master > /dev/null 2>&1
+git checkout master
 
 printf 'All done!\n'
