@@ -1,0 +1,2 @@
+# Problem D
+Initially, just picture a graph where each 2 vertices is directly connected. If there exist node u, v, w, where w != u and w != v and d(u, v) > d(u, w) + d(w, v) then output -1 because it is a contradiction (d(u, v) is not shortest path). Now we will strip off some unnecessary edges from this graph. Imagine an edge between u and v. If there is some other node w where w != u and w != v and d(u, v) = d(u, w) + d(w, v), then edge u-v can be excluded from the graph. The answer is the sum of edges that is not excluded.

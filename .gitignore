@@ -1,0 +1,11 @@
+*
+
+!.gitignore
+!*/
+!*.cpp
+!editorial.md
+!*.sh
+!*.html
+!*.css
+!*.js
+!.travis.yml

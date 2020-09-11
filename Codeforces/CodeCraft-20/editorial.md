@@ -1,0 +1,2 @@
+# Problem E
+We can solve it with dynamic programming dp[n][numAudienceLeft][availablePosition]: maximum score reachable out of the first n player if we can take numAudienceLeft people as audiences and the available positions is denoted by mask availablePositions. Unfortunately this dp will require too much memory. One crucial observation is that we can drop the numAudienceLeft parameter by processing the player with higher audience score first. If this player is not assigned to any position, then we assign it as audience.
