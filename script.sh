@@ -8,14 +8,14 @@ printf 'Setting git name and email is done!\n'
 printf 'Preparing gh-pages branch...\n'
 # Check if branch gh-pages exists
 # https://stackoverflow.com/a/28776049
-git rev-parse --verify gh-pages > /dev/null 2>&1
+git rev-parse --verify gh-pages
 
 if [ $? -eq 0 ]
 then
-  git branch -D gh-pages > /dev/null 2>&1
+  git branch -D gh-pages
 fi
 
-git checkout --orphan gh-pages > /dev/null 2>&1
+git checkout --orphan gh-pages
 printf 'Preparing gh-pages branch is done!\n'
 
 printf 'Generating index.html...\n'
