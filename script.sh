@@ -1,8 +1,8 @@
 set -e
 
 printf 'Setting git name and email...\n\n'
-git config user.name
-git config user.email
+git config user.name "Alvin Piter"
+git config user.email "alpiter10@gmail.com"
 printf 'Setting git name and email is done!\n\n'
 
 printf 'Preparing gh-pages branch...\n\n'
