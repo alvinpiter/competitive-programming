@@ -17,7 +17,7 @@ git checkout --orphan gh-pages > /dev/null 2>&1
 printf 'Preparing gh-pages branch is done!\n'
 
 printf 'Generating index.html...\n'
-echo $(git rev-parse --short HEAD) > index.html
+echo 'Script v5' > index.html
 printf 'Generating index.html is done!\n'
 
 printf 'Pushing changes to remote gh-pages branch...\n'
