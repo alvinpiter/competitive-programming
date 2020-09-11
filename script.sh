@@ -5,31 +5,24 @@ git config user.name "Alvin Piter" > /dev/null 2>&1
 git config user.email "alpiter10@gmail.com" > /dev/null 2>&1
 printf 'Setting git name and email is done!\n'
 
-git status
-
 printf 'Preparing gh-pages branch...\n'
 # Check if branch gh-pages exists
 # https://stackoverflow.com/a/28776049
-git rev-parse --verify gh-pages
-
-if [ $? -eq 0 ]
-then
+if git rev-parse --verify gh-pages > /dev/null 2>&1; then
   git branch -D gh-pages
 fi
 
-git checkout --orphan gh-pages
+git checkout --orphan gh-pages > /dev/null 2>&1
 printf 'Preparing gh-pages branch is done!\n'
 
 printf 'Generating index.html...\n'
 echo 'Script v5' > index.html
-cat index.html
 printf 'Generating index.html is done!\n'
 
 printf 'Pushing changes to remote gh-pages branch...\n'
 git add . > /dev/null 2>&1
 git commit -m "Update index.html" > /dev/null 2>&1
-git log
-git push origin --force gh-pages
+git push https://${GITHUB_TOKEN}@github.com/alvinpiter/competitive-programming.git --force gh-pages
 printf 'Pushing changes to remote gh-pages branch is done!\n'
 
 git checkout master > /dev/null 2>&1
