@@ -1,3 +1,9 @@
+printf 'Setting git name and email...\n'
+git config user.name "Alvin Piter" > /dev/null 2>&1
+git config user.email "alpiter10@gmail.com" > /dev/null 2>&1
+printf 'Setting git name and email is done!\n'
+
+printf 'Preparing gh-pages branch...\n'
 # Check if branch gh-pages exists
 # https://stackoverflow.com/a/28776049
 git rev-parse --verify gh-pages > /dev/null 2>&1
@@ -8,9 +14,10 @@ then
 fi
 
 git checkout --orphan gh-pages > /dev/null 2>&1
+printf 'Preparing gh-pages branch is done!\n'
 
 printf 'Generating index.html...\n'
-echo 'Script v3' > index.html
+echo $(git rev-parse --short HEAD) > index.html
 printf 'Generating index.html is done!\n'
 
 printf 'Pushing changes to remote gh-pages branch...\n'
