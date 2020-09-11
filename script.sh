@@ -21,7 +21,7 @@ printf 'Generating index.html is done!\n\n'
 
 printf 'Pushing changes to remote gh-pages branch...\n\n'
 git add .
-git commit -m "Update index.html"
+git commit -m "Update index.html" > /dev/null 2>&1
 git push https://${GITHUB_TOKEN}@github.com/alvinpiter/competitive-programming.git --force gh-pages
 printf 'Pushing changes to remote gh-pages branch is done!\n\n'
 
