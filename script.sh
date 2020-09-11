@@ -5,6 +5,8 @@ git config user.name "Alvin Piter" > /dev/null 2>&1
 git config user.email "alpiter10@gmail.com" > /dev/null 2>&1
 printf 'Setting git name and email is done!\n'
 
+git status
+
 printf 'Preparing gh-pages branch...\n'
 # Check if branch gh-pages exists
 # https://stackoverflow.com/a/28776049
