@@ -1,1 +1,2 @@
-script: bash script.sh
+script:
+- ls
