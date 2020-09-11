@@ -1,5 +1,7 @@
 set -e
 
+git status
+
 printf 'Setting git name and email...\n'
 git config user.name "Alvin Piter" > /dev/null 2>&1
 git config user.email "alpiter10@gmail.com" > /dev/null 2>&1
