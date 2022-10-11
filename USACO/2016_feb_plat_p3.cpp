@@ -77,6 +77,9 @@ public:
   }
 
   LL query(LL x) {
+    // IMPORTANT
+    ptrBest = min(ptrBest, (int) lines.size() - 1);
+
     while (ptrBest + 1 < lines.size() && eval(lines[ptrBest + 1], x) < eval(lines[ptrBest], x)) {
       ptrBest += 1;
     }
