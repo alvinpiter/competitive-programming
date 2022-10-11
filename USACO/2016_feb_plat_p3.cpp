@@ -23,7 +23,7 @@ dp[i][k] = min(
 Notice that the calculation can be speed up by convex hull trick. The lines in the convex hull will
 have -sum[j - 1] as its gradient and dp[j][k - 1] + wsum[j - 1] as its constant.
 
-The lines are added to the convex hull starting from the one with the largest gradient. We can maintain the upper hull
+The lines are added to the convex hull starting from the one with the smallest gradient. We can maintain the upper hull
 of the lines.
 
 Total complexity will be O(n^2 * k), O(nk) for solving each of the 1-dimensional problem, and O(n) for n 1-dimensional
@@ -55,7 +55,7 @@ private:
   bool checkObsolete(Line prevPrevLine, Line prevLine, Line newLine) {
     /*
     prevLine is obsolete if the x-coordinate of intersection between the newLine and the prevLine
-    is smaller than the x-coordinate of intersection between the prevPrevLine and prevLine
+    is larger than the x-coordinate of intersection between the prevPrevLine and prevLine
 
     x-coordinate of the intersection of newLine and prevLine:
     x = (prevLine.c - newLine.c)/(newLine.m - prevLine.m)
@@ -64,7 +64,9 @@ private:
     x = (prevLine.c - prevPrevLine.c)/(prevPrevLine.m - prevLine.m)
     */
 
-    return (prevLine.c - newLine.c) * (prevPrevLine.m - prevLine.m) < (prevLine.c - prevPrevLine.c) * (newLine.m - prevLine.m);
+    double x1 = (prevLine.c - newLine.c)/(1.0 * newLine.m - prevLine.m);
+    double x2 = (prevLine.c - prevPrevLine.c)/(1.0 * prevPrevLine.m - prevLine.m);
+    return x1 > x2;
   }
 
 public:
